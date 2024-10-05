@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using PointsApp.Data;
 using PointsApp.Models;
+using PointsApp.Services;
 
-namespace PointsApp.Data.Repositories;
+namespace PointsApp.Services;
 
-public class PointTransactionRepository
+public class PointTransactionRepository : IPointTransactionRepository
 {
     private readonly ApplicationDbContext _context;
 

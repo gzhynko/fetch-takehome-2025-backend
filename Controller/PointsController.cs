@@ -7,9 +7,9 @@ namespace PointsApp.Controller
     [ApiController]
     public class PointsController : ControllerBase
     {
-        private readonly PointsService _pointsService;
+        private readonly IPointsService _pointsService;
 
-        public PointsController(PointsService pointsService)
+        public PointsController(IPointsService pointsService)
         {
             _pointsService = pointsService;
         }

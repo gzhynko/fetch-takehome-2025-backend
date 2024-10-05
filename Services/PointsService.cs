@@ -1,13 +1,12 @@
-using PointsApp.Data.Repositories;
 using PointsApp.Models;
 
 namespace PointsApp.Services;
 
-public class PointsService
+public class PointsService : IPointsService
 {
-    private readonly PointTransactionRepository _repository;
+    private readonly IPointTransactionRepository _repository;
 
-    public PointsService(PointTransactionRepository repository)
+    public PointsService(IPointTransactionRepository repository)
     {
         _repository = repository;
     }

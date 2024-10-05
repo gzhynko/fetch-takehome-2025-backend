@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using PointsApp.Data;
-using PointsApp.Data.Repositories;
 using PointsApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbContext>(opt => 
     opt.UseInMemoryDatabase("ApplicationDbContext"));
 
-builder.Services.AddScoped<PointTransactionRepository>();
-builder.Services.AddScoped<PointsService>();
+builder.Services.AddScoped<IPointTransactionRepository, PointTransactionRepository>();
+builder.Services.AddScoped<IPointsService, PointsService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
