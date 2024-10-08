@@ -1,0 +1,10 @@
+1. Why did you choose the tools, libraries, and language you used for the coding exercise?
+I've had quite a bit of previous experience with C# and ASPNET, so I am familiar with the technology and wanted to take advantage of best design principles for an API.
+
+2. What are the advantages and disadvantages of your solution?
+I would say one of the main advantages is the use of the controller-service-repository pattern that allows for scalability and code separation. 
+Another advantage is the fact that the point transactions are saved and operated on in a way that makes it possible to examine the original transaction log. It does not modify the points of the stored transactions, but instead uses a separate column (AvailablePoints) to track point usage.   
+
+3. What has been a favorite school/personal project thus far? What about it that challenged you?
+My favorite is probably AI Penguins, which is a Godot + Rust project that uses a local LLM to generate dialogues between characters and uses TTS to voice these dialogues. 
+I encountered numerous challenges while working on the project, but the main ones were setting up a local LLM and making a reliable interface between the LLM run through Rust, the TTS service, and the game project in Godot.

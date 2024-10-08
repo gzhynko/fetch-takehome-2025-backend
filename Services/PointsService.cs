@@ -13,6 +13,8 @@ public class PointsService : IPointsService
 
     public async Task AddTransaction(PointTransaction transaction)
     {
+        // whenever we receive a transaction with negative points, subtract from previous transactions
+        // and set the transaction's available points to 0 
         if (transaction.Points < 0)
         {
             var pointsBalance = await GetPointsBalanceByPayer();
@@ -42,12 +44,14 @@ public class PointsService : IPointsService
     
     public async Task<SpendResult[]> SpendPoints(int points)
     {
+        // make sure we have enough points
         var pointsAvailable = await _repository.GetTotalPointBalance();
         if (points > pointsAvailable)
         {
             throw new ArgumentException("Not enough points");
         }
         
+        // go through the transactions in chronological order and subtract as many points as possible from each
         var spendBreakdown = new Dictionary<string, int>();
         var pointsRemaining = points;
         foreach (var transaction in await _repository.GetTransactionsChronological())
@@ -66,7 +70,9 @@ public class PointsService : IPointsService
             
         await _repository.SaveChanges();
 
-        return spendBreakdown.ToList().Select(e => new SpendResult { Payer = e.Key, Points = e.Value }).ToArray();
+        // convert the spend breakdown map to an array of SpendResult objects
+        return spendBreakdown.ToList()
+            .Select(e => new SpendResult { Payer = e.Key, Points = e.Value }).ToArray();
     }
 
     public async Task<Dictionary<string, int>> GetPointsBalanceByPayer()

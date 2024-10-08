@@ -4,7 +4,7 @@ using PointsApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// add services to the container
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<ApplicationDbContext>(opt => 
@@ -20,7 +20,7 @@ var app = builder.Build();
 
 app.MapDefaultControllerRoute();
 
-// Configure the HTTP request pipeline.
+// enable swagger when in dev build
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

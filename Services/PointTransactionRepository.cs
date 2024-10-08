@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PointsApp.Data;
 using PointsApp.Models;
-using PointsApp.Services;
 
 namespace PointsApp.Services;
 
@@ -22,7 +21,9 @@ public class PointTransactionRepository : IPointTransactionRepository
 
     public async Task<List<PointTransaction>> GetTransactionsChronological()
     {
-        return await _context.PointTransactions.OrderBy(g => g.Timestamp).ToListAsync();
+        return await _context.PointTransactions
+            .OrderBy(g => g.Timestamp)
+            .ToListAsync();
     }
 
     public async Task<List<PointTransaction>> GetTransactionsByPayerChronological(string payer)
@@ -49,7 +50,6 @@ public class PointTransactionRepository : IPointTransactionRepository
     {
         return await _context.PointTransactions.SumAsync(g => g.AvailablePoints);
     }
-    
 
     public async Task SaveChanges()
     {
